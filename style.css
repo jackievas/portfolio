@@ -1,3 +1,18 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Style for the schedule report container */
+#scheduleReport {
+  margin-top: 20px;
+}
+
 /* Add borders to cells with the 'dayOfWeek' class */
 .scheduleTable {
   border-collapse: collapse;
