@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tableHeaderRow.appendChild(th);
           });
 
+          const employeeNameToRowIndex = {}; // Map employee name to rowIndex
+
           // Process schedule data
           xmlDoc.querySelectorAll('shift').forEach(shift => {
             const employeeId = shift.querySelector('employeeId').textContent;
@@ -41,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
               const employeeName = employee.name;
 
               // Check if the employee name has an assigned rowIndex, if not, create a new row
-              if (!scheduleTable.querySelector(`.${employeeName}`)) {
+              if (!employeeNameToRowIndex[employeeName]) {
                 const scheduleRow = scheduleTable.insertRow();
-                scheduleRow.classList.add(employeeName); // Add class to the row
                 const nameCell = scheduleRow.insertCell(0); // Insert at the beginning
                 nameCell.textContent = employeeName;
+                employeeNameToRowIndex[employeeName] = scheduleRow.rowIndex;
 
                 // Create cells for all days of the week
                 daysOfWeek.forEach(() => {
@@ -56,8 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
               // Find the index of the day and add the schedule information to the corresponding cell
               const dayIndex = daysOfWeek.indexOf(day);
-              const rowClass = scheduleTable.querySelector(`.${employeeName}`);
-              const cell = rowClass.cells[dayIndex + 1]; // +1 to skip the name cell
+              const rowIndex = employeeNameToRowIndex[employeeName];
+
+              const cell = scheduleTable.rows[rowIndex].cells[dayIndex + 1]; // +1 to skip the name cell
               // Update the cell content without "Shift"
               cell.innerHTML += `
                 <div class="scheduleItem">
@@ -75,5 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => console.error('Error loading employee data:', error));
 });
+
+
 
 
