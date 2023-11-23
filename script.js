@@ -24,10 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
           daysOfWeek.forEach(day => {
             const th = document.createElement('th');
             th.textContent = day;
+            th.classList.add('dayOfWeek'); // Add class to days of the week cells
             tableHeaderRow.appendChild(th);
           });
-
-          const employeeNameToRowIndex = {}; // Map employee name to rowIndex
 
           // Process schedule data
           xmlDoc.querySelectorAll('shift').forEach(shift => {
@@ -42,23 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
               const employeeName = employee.name;
 
               // Check if the employee name has an assigned rowIndex, if not, create a new row
-              if (!employeeNameToRowIndex[employeeName]) {
+              if (!scheduleTable.querySelector(`.${employeeName}`)) {
                 const scheduleRow = scheduleTable.insertRow();
+                scheduleRow.classList.add(employeeName); // Add class to the row
                 const nameCell = scheduleRow.insertCell(0); // Insert at the beginning
                 nameCell.textContent = employeeName;
-                employeeNameToRowIndex[employeeName] = scheduleRow.rowIndex;
+
+                // Create cells for all days of the week
+                daysOfWeek.forEach(() => {
+                  const cell = scheduleRow.insertCell();
+                  cell.classList.add('scheduleCell'); // Add class to all cells
+                });
               }
 
               // Find the index of the day and add the schedule information to the corresponding cell
               const dayIndex = daysOfWeek.indexOf(day);
-              const rowIndex = employeeNameToRowIndex[employeeName];
-
-              // Ensure the row has enough cells for the current day
-              while (scheduleTable.rows[rowIndex].cells.length <= dayIndex) {
-                scheduleTable.rows[rowIndex].insertCell();
-              }
-
-              const cell = scheduleTable.rows[rowIndex].cells[dayIndex];
+              const rowClass = scheduleTable.querySelector(`.${employeeName}`);
+              const cell = rowClass.cells[dayIndex + 1]; // +1 to skip the name cell
               // Update the cell content without "Shift"
               cell.innerHTML += `
                 <div class="scheduleItem">
@@ -76,4 +75,5 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => console.error('Error loading employee data:', error));
 });
+
 
