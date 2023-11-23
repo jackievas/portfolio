@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
 
-          // Append the table to the scheduleReportDiv
           const scheduleReportDiv = document.getElementById('scheduleReport');
           scheduleReportDiv.appendChild(scheduleTable);
         })
