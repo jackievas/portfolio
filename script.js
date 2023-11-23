@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Create cells for all days of the week
                 daysOfWeek.forEach(() => {
-                  const cell = scheduleRow.insertCell();
-                  cell.classList.add('scheduleCell'); // Add class to all cells
+                  scheduleRow.insertCell();
                 });
               }
 
