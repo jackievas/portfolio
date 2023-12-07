@@ -71,12 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const scheduleReportDiv = document.getElementById('scheduleReport');
           scheduleReportDiv.appendChild(scheduleTable);
+
+          // Example: Use jQuery to change the background color of the h1 element
+          $('h1').css('background-color', '#f0f0f0');
+
+          // Example: Attach a click event handler to the employeeInfo div
+          $('#employeeInfo').on('click', function () {
+            alert('Employee info clicked!');
+          });
         })
         .catch(error => console.error('Error loading schedule data:', error));
     })
     .catch(error => console.error('Error loading employee data:', error));
 });
-
 
 
 
