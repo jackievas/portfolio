@@ -79,11 +79,34 @@ document.addEventListener('DOMContentLoaded', () => {
           $('#employeeInfo').on('click', function () {
             alert('Employee info clicked!');
           });
+
+          // Render React component with employee data
+          const employees = employeeData.employees;
+          ReactDOM.render(<EmployeeList employees={employees} />, document.getElementById('employeeInfo'));
         })
         .catch(error => console.error('Error loading schedule data:', error));
     })
     .catch(error => console.error('Error loading employee data:', error));
 });
+
+// React component to display employee information
+function EmployeeList({ employees }) {
+  return (
+    <div>
+      <h2>Employee Information</h2>
+      <ul>
+        {employees.map(employee => (
+          <li key={employee.id}>
+            <strong>ID:</strong> {employee.id}<br />
+            <strong>Name:</strong> {employee.name}<br />
+            <strong>Position:</strong> {employee.position}<br />
+            <strong>Department:</strong> {employee.department}<br />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 
 
