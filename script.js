@@ -71,42 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const scheduleReportDiv = document.getElementById('scheduleReport');
           scheduleReportDiv.appendChild(scheduleTable);
-
-          // Example: Use jQuery to change the background color of the h1 element
-          $('h1').css('background-color', '#f0f0f0');
-
-          // Example: Attach a click event handler to the employeeInfo div
-          $('#employeeInfo').on('click', function () {
-            alert('Employee info clicked!');
-          });
-
-          // Render React component with employee data
-          const employees = employeeData.employees;
-          ReactDOM.render(<EmployeeList employees={employees} />, document.getElementById('employeeInfo'));
         })
         .catch(error => console.error('Error loading schedule data:', error));
     })
     .catch(error => console.error('Error loading employee data:', error));
-});
-
-// React component to display employee information
-function EmployeeList({ employees }) {
-  return (
-    <div>
-      <h2>Employee Information</h2>
-      <ul>
-        {employees.map(employee => (
-          <li key={employee.id}>
-            <strong>ID:</strong> {employee.id}<br />
-            <strong>Name:</strong> {employee.name}<br />
-            <strong>Position:</strong> {employee.position}<br />
-            <strong>Department:</strong> {employee.department}<br />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+});  
 
 
 
