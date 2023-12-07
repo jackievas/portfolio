@@ -21,4 +21,25 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('employeeInfo').innerHTML = html;
         })
         .catch(error => console.error('Error fetching data:', error));
+     $("#hideButton").click(function () {
+        $("#targetElement").hide();
+    });
+
+    $("#showButton").click(function () {
+        $("#targetElement").show();
+    });
+
+    // AJAX Request using jQuery
+    $.ajax({
+        url: 'your_api_endpoint',
+        method: 'GET',
+        success: function (data) {
+            console.log('Data received:', data);
+            // Handle the data as needed
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+
 });
