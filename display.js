@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Fetch data from employee.json
-    fetch('employee.json')
+    // Fetch data from local JSON file
+    fetch('api-data.json')
         .then(response => response.json())
         .then(data => {
-            // Generate HTML content
+            // Generate HTML content for employee information
             let html = '<h2>Employee Information</h2><ul>';
 
             data.employees.forEach(employee => {
@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
             // Display the HTML content on the page
             document.getElementById('employeeInfo').innerHTML = html;
         })
-        .catch(error => console.error('Error fetching data:', error));
-     $("#hideButton").click(function () {
+        .catch(error => console.error('Error fetching employee data:', error));
+
+    // jQuery code for hiding and showing elements
+    $("#hideButton").click(function () {
         $("#targetElement").hide();
     });
 
@@ -29,17 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#targetElement").show();
     });
 
-    // AJAX Request using jQuery
-    $.ajax({
-        url: 'your_api_endpoint',
-        method: 'GET',
-        success: function (data) {
-            console.log('Data received:', data);
-            // Handle the data as needed
-        },
-        error: function (error) {
-            console.error('Error fetching data:', error);
-        }
+    // Simulating AJAX Request using jQuery (replace with actual API endpoint)
+    $(document).ready(function () {
+        $.ajax({
+            url: 'https://example.com/api/employee', // Replace with your actual API endpoint
+            method: 'GET',
+            success: function (data) {
+                console.log('Data received:', data);
+                // Handle the data as needed
+            },
+            error: function (error) {
+                console.error('Error fetching API data:', error);
+            }
+        });
     });
-
 });
